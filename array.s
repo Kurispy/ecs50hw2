@@ -74,9 +74,11 @@ init:
   #set writeValue to EDX
   movl 8(%eax), %ebx
   movl %ebx, writeValue
+#DELETE EVERYTHING BEFORE THIS IN INIT
 
   movl %eax, %edi
-  movl l_CA, %eax
+  movl (%eax), %eax
+  movl 4(%eax), %eax
   movl $2, %ecx
   idivl %ecx 
   movl %eax, %esi # %esi is now l_CA / 2
@@ -86,6 +88,7 @@ init:
   ret
 
 readsa:  
+  call init
   movl $0, %ebx # EBX will serve as the current index for CA
 rsal:
   movl (%eax), %ecx
